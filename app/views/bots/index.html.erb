@@ -14,23 +14,23 @@
       <%= "What's troubling you..."%>
       <br/>
     <% else %>
-      <%= "Problem: " + params[:question] %>
+      <span class="subject">Problem: </span><%= params[:question] %>
       <br/>
       <% if !@random.nil? %>
         <!-- do client update to create a tweet -->
-        <% @client.update("Problem: #{params[:question]}; Confucius says: #{@random} #Ruby #TwitterBot #ConfuciusSays #BadAdvice") %>
+        <% @client.update("Problem: #{params[:question]}; Confucius says: #{@random} #TwitterBot #ConfuciusSays") %>
         <!-- wait 1 second for twitter to show new feed -->
         <% sleep(1) %>
-        <%= "Confucius says: " + @random %>
+        <span class="subject">Confucius says: </span><%= @random %>
       <% else %>
-        <%= "Confucius says: Sorry! Tweet limit has reached." %>
+        <span class="subject">Confucius says: Sorry! Tweet limit has reached.</span>
       <% end %>
     <% end %>
     </p>
   </div>
 
   <form class="search" action="confucius" method="post">
-    <input type="search" name="question" maxlength="30" required autofocus>
+    <input type="search" name="question" maxlength="50" required autofocus>
     <button type="submit">Tweet!</button>
   </form>
 
