@@ -1,0 +1,44 @@
+<div class="codrops-top clearfix">
+    <a class="codrops-icon" href="https://learngameapp.herokuapp.com"><i class="fa fa-arrow-circle-left"></i><span>Previous Project</span></a>
+    <a class="codrops-icon" href="https://apartment-finder-learn.herokuapp.com"><span>Next Project</span><i class="fa fa-arrow-circle-right"></i></a>
+    <span class="right"><a class="codrops-icon" href="http://www.nat14.com"><i class="fa fa-home"></i><span>Home</span></a></span>
+</div>
+<div class="container">
+  <div class="header">
+    <h1>Ask<span>Confucius</span></h1>
+    <div>
+      <h2>Tell Confucius your problem, he always have answer!</h2>
+    </div>
+    <p>
+    <% if params[:question].nil? %>
+      <%= "What's troubling you..."%>
+      <br/>
+    <% else %>
+      <%= "Problem: " + params[:question] %>
+      <br/>
+      <% if !@random.nil? %>
+        <!-- do client update to create a tweet -->
+        <% @client.update("Problem: #{params[:question]}; Confucius says: #{@random} #Ruby #TwitterBot #ConfuciusSays #BadAdvice") %>
+        <!-- wait 1 second for twitter to show new feed -->
+        <% sleep(1) %>
+        <%= "Confucius says: " + @random %>
+      <% else %>
+        <%= "Confucius says: Sorry! Tweet limit has reached." %>
+      <% end %>
+    <% end %>
+    </p>
+  </div>
+
+  <form class="search" action="confucius" method="post">
+    <input type="search" name="question" maxlength="30" required autofocus>
+    <button type="submit">Tweet!</button>
+  </form>
+
+  <p>
+    <a class="twitter-timeline" href="https://twitter.com/nattap0n" data-widget-id="708113857491771392" data-chrome="nofooter noborders">Tweets by @nattap0n</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </p>
+
+</div>
+<footer>
+  Thank you to <a href="https://twitter.com/DavidDFL">@DavidDFL</a> <a href="https://twitter.com/gabrieljbonner">@gabrieljbonner</a> and <a href="https://github.com/magicnights">Ruby Magic Nights</a>
+</footer>
